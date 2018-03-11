@@ -1,0 +1,62 @@
+/**
+ * Underwater theme for reveal.js.
+ *
+ * By Kiril Knysh, https://kirilknysh.github.io/
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #222;
+
+$mainColor: #fff;
+$headingColor: #fff;
+
+$mainFontSize: 38px;
+$mainFont: Helvetica, sans-serif;
+$headingFont: Helvetica, sans-serif;
+$headingFontWeight: 600;
+$linkColor: #2b5f4a;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 1.45em;
+$heading2Size: 1.35em;
+$heading3Size: 1.1em;
+$heading4Size: 1.0em;
+
+section.has-light-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #222;
+	}
+}
+
+.emphasis {
+	color: #439473;
+}
+
+.pros {
+	color: #2cab49;
+}
+.cons {
+	color: #a52626;
+}
+
+.reveal .huge {
+	font-size: 7em;
+}
+.reveal .big {
+	font-size: 5em;
+}
+
+.reveal a {
+	text-decoration: underline!important;
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
