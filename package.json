@@ -1,7 +1,7 @@
 {
   "name": "js-scope-talk",
   "version": "1.0.0",
-  "description": "(r)Evolution of set-top boxes UI",
+  "description": "JS scope",
   "homepage": "https://kirilknysh.github.io/js-scope-talk/",
   "main": "js/reveal.js",
   "scripts": {
