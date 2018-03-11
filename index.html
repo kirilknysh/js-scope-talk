@@ -31,7 +31,231 @@
 						Landing
 					</aside>
 				</section>
-				<section></section>
+				<section>
+					<section>
+						<p><span class="emphasis">Scope</span></p>
+						<div style="text-align: left;">
+							<p>the locations where the variable is accessible</p>
+							<p>is a logical boundaries in which a variable (or expression) has its meaning</p>
+						</div>
+						<pre class="fragment"><code data-trim data-noescape>
+function () {
+  var loki;
+}
+						</code></pre>
+					</section>
+					<section>
+						<p><span class="emphasis">Scope</span></p>
+						<ul>
+							<li class="fragment">global</li>
+							<li class="fragment">local</li>
+							<li class="fragment">block</li>
+						</ul>
+						<aside class="notes">
+							More details later, now more about common characteristics of all kinds of scopes
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<p><span class="emphasis">nested</span> scope</p>
+						<pre class="fragment"><code data-trim data-noescape>
+function space() {
+  var loki = 'loki';
+
+  function planet() {
+    var god = 'god';
+
+    console.log(loki, god);
+  }
+}
+						</code></pre>
+					</section>
+					<section>
+						<p>scope's <span class="emphasis">shadowing</span></p>
+						<pre class="fragment current-visible" style="position: absolute; width: 100%;"><code data-trim data-noescape>
+var loki = 'loki';
+
+function space() {
+  var loki = 'god';
+
+  function planet() {
+    var loki = 'human';
+
+    console.log(loki);
+  }
+
+  planet();
+}
+
+space();
+						</code></pre>
+						<pre class="fragment current-visible" style="position: absolute; width: 100%;"><code data-trim data-noescape>
+var loki = 'loki';
+
+function space() {
+  var loki = 'god';
+
+  function planet() {
+    console.log(loki);
+  }
+
+  planet();
+}
+
+space();
+						</code></pre>
+						<pre class="fragment current-visible" style="position: absolute; width: 100%;"><code data-trim data-noescape>
+var loki = 'loki';
+
+function space() {
+
+  function planet() {
+    console.log(loki);
+  }
+
+  planet();
+}
+
+space();
+						</code></pre>
+						<div class="fragment" style="position: absolute; width: 100%;">
+							<p>Example:</p>
+							<pre><code data-trim data-noescape>
+function calculate() {
+  var a = 3, b = 5;
+
+  function calculateInner() {
+    var b = 7, c = 11;
+
+    a += b + c;
+  };
+
+  calculateInner();
+
+  console.log('a =', a, '; b = ', b);
+}
+
+calculate();
+							</code></pre>
+						</div>
+					</section>
+					<section>
+						<p><span class="emphasis">hoisting</span><span class="fragment" data-fragment-index="2"> issue</span></p>
+						<p class="fragment current-visible" style="position: absolute;" data-fragment-index="0">all variables' and functions' <span class="emphasis">declarations</span> are moved (hoisted) to the top of their direct scope</p>
+						<div class="fragment current-visible" style="position: absolute; width: 100%; display: flex;" data-fragment-index="1">
+							<pre style="width: 45%;"><code data-trim data-noescape>
+space();
+
+function space() {
+  console.log(loki); // undefined
+}
+
+var loki = 'god';
+							</code></pre>
+							<pre style="width: 45%;"><code data-trim data-noescape>
+var loki;
+function space() {
+  console.log(loki); // undefined
+}
+
+space();
+loki = 'god';
+							</code></pre>
+						</div>
+						<div style="position: absolute; width: 100%; display: flex;">
+							<pre class="fragment" style="width: 45%;" data-fragment-index="2"><code data-trim data-noescape>
+var loki = 'god';
+
+function planet() {
+  console.log(loki);
+  var loki = 'human';
+  console.log(loki);
+}
+
+planet();
+							</code></pre>
+							<pre class="fragment" style="width: 45%;" data-fragment-index="3"><code data-trim data-noescape>
+var loki = 'god';
+
+function planet() {
+  var loki;
+
+  console.log(loki);
+  loki = 'human';
+  console.log(loki);
+}
+
+planet();
+							</code></pre>
+						</div>
+					</section>
+					<section>
+						<p>single <span class="emphasis">var</span> pattern</p>
+						TODO: add example
+					</section>
+					<section>
+						<p>no <span class="emphasis">block</span> scope</p>
+						<p class="fragment">only functions create a new scope</p>
+						<pre class="fragment"><code data-trim data-noescape>
+function planet(population) {
+  var loki = 'human';
+
+  if (true) {
+    var country = 'any';
+
+    for (var person = 0; person < population; person++) {
+        // do smth personally
+    }
+  }
+
+  console.log(loki, country, person);
+}
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<p><span class="emphasis">global</span> scope</p>
+						<p class="fragment current-visible" style="position: absolute;">every variable declared outside all functions or curly braces <span class="hljs" style="display: initial; padding: 3px 5px;">{}</span> is said to be defined in the global scope</p>
+						<div style="position: absolute; width: 100%;">
+							<pre class="fragment"><code data-trim>
+<script src="script.js"></script>
+							</code></pre>
+							<pre class="fragment"><code data-trim>
+<script type="text/javascript">
+  var loki = 'loki';
+
+  function space() {
+    loki = 'god';
+  }
+</script>
+							</code></pre>
+							<pre class="fragment"><code data-trim data-noescape>
+var loki = 'loki';
+
+function space() {
+  country = 'any'; // no "var"
+}
+							</code></pre>
+						</div>
+					</section>
+					<section>
+						<p><span class="emphasis">global</span> scope</p>
+						<p class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">window</a> (web)</p>
+						<p class="fragment"><a href="https://nodejs.org/api/globals.html#globals_global">global</a> (Node.js)</p>
+						<p class="fragment"><a class="cons" href="https://github.com/tc39/proposal-global/issues/20">global</a> (web)</p>
+					</section>
+					<section>
+						<p><span class="emphasis">global</span> scope</p>
+						<p class="big cons">avoid global variables</p>
+						<ul class="fragment">
+							<li>un-predictable</li>
+							<li>non-reusable</li>
+							<li>naming collisions</li>
+						</ul>
+					</section>
+				</section>
 				<section>
 					<h2 class="emphasis">Thanks</h2>
 				</section>

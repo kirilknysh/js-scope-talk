@@ -1,5 +1,5 @@
 /**
- * Underwater theme for reveal.js.
+ * Loki-cloak theme for reveal.js.
  *
  * By Kiril Knysh, https://kirilknysh.github.io/
  */
@@ -35,22 +35,24 @@ section.has-light-background {
 	}
 }
 
-.emphasis {
-	color: #439473;
-}
+.reveal {
+	.emphasis {
+		color: #439473;
+	}
 
-.pros {
-	color: #2cab49;
-}
-.cons {
-	color: #a52626;
+	.pros {
+		color: #2cab49;
+	}
+	.cons {
+		color: #a52626;
+	}
 }
 
 .reveal .huge {
 	font-size: 7em;
 }
 .reveal .big {
-	font-size: 5em;
+	font-size: 2em;
 }
 
 .reveal a {
