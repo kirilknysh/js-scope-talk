@@ -36,7 +36,7 @@
 						<p><span class="emphasis">Scope</span></p>
 						<div style="text-align: left;">
 							<p>the locations where the variable is accessible</p>
-							<p>is a logical boundaries in which a variable (or expression) has its meaning</p>
+							<p>a logical boundaries in which a variable (or expression) has its meaning</p>
 						</div>
 						<pre class="fragment"><code data-trim data-noescape>
 function () {
@@ -49,7 +49,6 @@ function () {
 						<ul>
 							<li class="fragment">global</li>
 							<li class="fragment">local</li>
-							<li class="fragment">block</li>
 						</ul>
 						<aside class="notes">
 							More details later, now more about common characteristics of all kinds of scopes
@@ -192,10 +191,24 @@ planet();
 					</section>
 					<section>
 						<p>single <span class="emphasis">var</span> pattern</p>
-						TODO: add example
+						<pre class="fragment"><code data-trim data-noescape>
+function planet(population) {
+  var loki = 'human', country = 'any', person = 0;
+
+  if (country) {
+    country = '';
+
+    for (person = 0; person < population; person++) {
+        // do smth personally
+    }
+  }
+
+  console.log(loki, country, person);
+}
+						</code></pre>
 					</section>
 					<section>
-						<p>no <span class="emphasis">block</span> scope</p>
+						<p>no <span class="emphasis">block</span> scope (up to ES2015)</p>
 						<p class="fragment">only functions create a new scope</p>
 						<pre class="fragment"><code data-trim data-noescape>
 function planet(population) {
@@ -253,9 +266,81 @@ function space() {
 							<li>un-predictable</li>
 							<li>non-reusable</li>
 							<li>naming collisions</li>
-						</ul>
+            </ul>
+            <pre class="fragment"><code data-trim data-noescape>
+if (('loki' in window) === false) {
+  var loki = 1;
+}
+console.log(loki);
+            </code></pre>
 					</section>
-				</section>
+        </section>
+        <section>
+          <section>
+            <p><span class="emphasis">local</span> scope</p>
+            <ul class="fragment">
+              <li>function scope</li>
+              <li>block scope</li>
+            </ul>
+          </section>
+          <section>
+            <p><span class="emphasis">block</span> scope (ES2015+)</p>
+            <pre class="fragment"><code data-trim data-noescape>
+{
+  const loki = 'captive';
+  let country = 'any';
+  console.log(loki, country);
+}
+
+console.log(loki, country); // ReferenceError: loki is not defined
+            </code></pre>
+          </section>
+          <section>
+            <p><span class="emphasis">block</span> scope</p>
+            <pre class="fragment"><code data-trim data-noescape>
+function planet(population) {
+  const loki = 'human';
+
+  if (true) {
+    const country = 'any';
+
+    for (let person = 0; person < population; person++) {
+        // do smth personally
+    }
+  }
+
+  console.log(loki, country, person); // ReferenceError: country is not defined
+}
+            </code></pre>
+          </section>
+          <section>
+            <p><span class="emphasis">const</span> vs <span class="emphasis">let</span></p>
+            <p class="fragment">
+              <span class="emphasis">let</span> = <span class="emphasis">var</span> + block scope
+            </p>
+            <p class="fragment">
+              <span class="emphasis">const</span> = <span class="emphasis">let</span> + reference immutability
+            </p>
+            <pre class="fragment"><code data-trim data-noescape>
+let population = 0;
+population = 1;
+population--;
+
+const country = 'any';
+country = 'different'; // TypeError: Assignment to constant variable.
+
+const cage = {
+  width: 15,
+  heigh: 10,
+};
+cage.width = 20;
+cage = null; // TypeError: Assignment to constant variable.
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <img class="plain" src="img/loki-in-a-cage.jpg" />
+        </section>
 				<section>
 					<h2 class="emphasis">Thanks</h2>
 				</section>
